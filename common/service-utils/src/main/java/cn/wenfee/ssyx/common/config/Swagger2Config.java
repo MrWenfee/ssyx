@@ -45,7 +45,7 @@ public class Swagger2Config {
                 .apiInfo(webApiInfo())
                 .select()
                 //只显示api路径下的页面
-                .apis(RequestHandlerSelectors.basePackage("com.atguigu.ssyx"))
+                .apis(RequestHandlerSelectors.basePackage("cn.wenfee.ssyx"))
                 .paths(PathSelectors.regex("/api/.*"))
                 .build()
                 .globalOperationParameters(pars);
@@ -70,7 +70,7 @@ public class Swagger2Config {
                 .apiInfo(adminApiInfo())
                 .select()
                 //只显示admin路径下的页面
-                .apis(RequestHandlerSelectors.basePackage("com.atguigu.ssyx"))
+                .apis(RequestHandlerSelectors.basePackage("cn.wenfee.ssyx"))
                 .paths(PathSelectors.regex("/admin/.*"))
                 .build()
                 .globalOperationParameters(pars);
@@ -80,18 +80,18 @@ public class Swagger2Config {
     private ApiInfo webApiInfo(){
         return new ApiInfoBuilder()
                 .title("网站-API文档")
-                .description("本文档描述了尚上优选网站微服务接口定义")
+                .description("本文档描述了优选网站微服务接口定义")
                 .version("1.0")
-                .contact(new Contact("atguigu", "http://atguigu.com", "atguigu"))
+                .contact(new Contact("wenfee", "http://ssyx.com", "779606713@qq.com"))
                 .build();
     }
 
     private ApiInfo adminApiInfo(){
         return new ApiInfoBuilder()
                 .title("后台管理系统-API文档")
-                .description("本文档描述了尚上优选后台系统服务接口定义")
+                .description("本文档描述了优选后台系统服务接口定义")
                 .version("1.0")
-                .contact(new Contact("atguigu", "http://atguigu.com", "atguigu"))
+                .contact(new Contact("wenfee", "http://ssyx.com", "wenfee"))
                 .build();
     }
 }
