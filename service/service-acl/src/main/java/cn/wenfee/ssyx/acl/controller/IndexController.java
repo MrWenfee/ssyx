@@ -9,7 +9,6 @@ import java.util.HashMap;
  * @author Wenfee
  * @date 2025/3/26
  */
-@CrossOrigin        // 跨域
 @RestController
 @RequestMapping("/admin/acl/index")
 public class IndexController {
