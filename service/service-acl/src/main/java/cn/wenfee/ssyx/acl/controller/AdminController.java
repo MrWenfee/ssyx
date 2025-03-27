@@ -95,7 +95,8 @@ public class AdminController {
     @ApiOperation("删除用户")
     @DeleteMapping("remove/{id}")
     public Result removeById(@PathVariable Long id) {
-        boolean b = adminService.removeById(id);
+        // boolean b = adminService.removeById(id);
+        boolean b = adminService.removeByAdminId(id);
         if (!b) {
             return Result.fail();
         }
@@ -106,7 +107,8 @@ public class AdminController {
     @ApiOperation("批量删除用户")
     @DeleteMapping("batchRemove")
     public Result batchRemove(@RequestBody List<Long> idList) {
-        boolean b = adminService.removeByIds(idList);
+        // boolean b = adminService.removeByIds(idList);
+        boolean b = adminService.batchRemove(idList);
         if (!b) {
             return Result.fail();
         }

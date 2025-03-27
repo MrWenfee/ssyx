@@ -101,14 +101,14 @@ public class RoleController {
     public Result remove(
             @ApiParam(name = "id", value = "角色id", required = true)
             @PathVariable Integer id) {
-        roleService.removeById(id);
+        roleService.deleteById(id);
         return Result.success();
     }
 
     @ApiOperation("批量删除角色")
     @DeleteMapping("batchRemove")
     public Result batchRemove(@RequestBody List<Integer> idList) {
-        roleService.removeByIds(idList);
+        roleService.batchRemoveByIds(idList);
         return Result.success();
     }
 

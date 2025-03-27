@@ -96,4 +96,25 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements IR
         }
         adminRoleService.saveBatch(adminRoles);
     }
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public void deleteById(Integer id) {
+        baseMapper.deleteById(id);
+        adminRoleService.remove(new LambdaQueryWrapper<AdminRole>()
+                .eq(AdminRole::getRoleId, id));
+    }
+
+    /**
+     * 批量删除角色
+     *
+     * @param idList 角色id列表
+     */
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public void batchRemoveByIds(List<Integer> idList) {
+        baseMapper.deleteBatchIds(idList);
+        adminRoleService.remove(new LambdaQueryWrapper<AdminRole>()
+                .in(AdminRole::getRoleId, idList));
+    }
 }

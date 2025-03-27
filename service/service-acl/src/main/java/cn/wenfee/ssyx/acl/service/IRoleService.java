@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -38,4 +39,19 @@ public interface IRoleService extends IService<Role> {
      * @param roleIds 角色id列表
      */
     void saveUserRoleRealtionShip(Long adminId, Long[] roleIds);
+
+    /**
+     * 删除角色
+     *
+     * @param id 角色id
+     */
+    void deleteById(Integer id);
+
+
+    /**
+     * 批量删除角色
+     *
+     * @param idList
+     */
+    void batchRemoveByIds(List<Integer> idList);
 }
