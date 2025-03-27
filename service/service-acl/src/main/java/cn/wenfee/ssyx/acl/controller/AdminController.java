@@ -1,6 +1,8 @@
 package cn.wenfee.ssyx.acl.controller;
 
+import cn.wenfee.ssyx.acl.service.IAdminRoleService;
 import cn.wenfee.ssyx.acl.service.IAdminService;
+import cn.wenfee.ssyx.acl.service.IRoleService;
 import cn.wenfee.ssyx.common.result.Result;
 import cn.wenfee.ssyx.model.acl.Admin;
 import cn.wenfee.ssyx.vo.acl.AdminQueryVo;
@@ -13,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -25,6 +28,16 @@ import java.util.Objects;
 public class AdminController {
 
     private IAdminService adminService;
+
+    private IRoleService roleService;
+
+    @Autowired
+    public void setRoleService(IRoleService roleService) {
+        if (Objects.isNull(roleService)) {
+            throw new NullPointerException("roleService is null");
+        }
+        this.roleService = roleService;
+    }
 
     @Autowired
     public void setAdminService(IAdminService adminService) {
@@ -104,6 +117,20 @@ public class AdminController {
     @PutMapping("update")
     public Result update(@RequestBody Admin user) {
         adminService.updateById(user);
+        return Result.success();
+    }
+
+    @ApiOperation("根据用户获取角色数据")
+    @GetMapping("toAssign/{adminId}")
+    public Result getAssign(@PathVariable Long adminId) {
+        Map<String, Object> roleMap = roleService.findRoleByUserId(adminId);
+        return Result.success(roleMap);
+    }
+
+    @ApiOperation("根据用户分配角色")
+    @PostMapping("doAssign")
+    public Result doAssign(@RequestParam Long adminId, @RequestParam Long[] roleIds) {
+        roleService.saveUserRoleRealtionShip(adminId, roleIds);
         return Result.success();
     }
 }
