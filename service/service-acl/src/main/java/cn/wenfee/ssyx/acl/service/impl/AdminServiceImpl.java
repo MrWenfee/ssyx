@@ -38,7 +38,7 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
 
     @Override
     public IPage<Admin> selectPage(Page<Admin> pageParam, AdminQueryVo userQueryVo) {
-        String name = userQueryVo.getName();
+        String name = userQueryVo.getUsername();
         LambdaQueryWrapper<Admin> queryWrapper = new LambdaQueryWrapper<Admin>()
                 .like(!StringUtils.isEmpty(name), Admin::getName, name);
         Page<Admin> adminPage = baseMapper.selectPage(pageParam, queryWrapper);
